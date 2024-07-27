@@ -1,6 +1,10 @@
 "use client"
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import RainingMoneyBackground from "./components/three/RainingMoney";
+import { Canvas } from "@react-three/fiber";
+import Link from "next/link";
+import { Footer } from "./components/footer";
 
 const nfttokenAddress = `GrRjEpwHbLE1KY3uxtAMU4ravHfbMGzWEL8HcERPb3Ad` // Prob using weird endpoint of api
 const coinMintAddres = `6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx`
@@ -29,7 +33,7 @@ export default function Home() {
   }, [nfttokenAddress, coinMintAddres]);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex z-10">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Welcome to&nbsp;
           <code className="font-mono font-bold">Retardio.exposed</code>
@@ -145,7 +149,18 @@ export default function Home() {
           <li className="mb-4">✔️ Pretty Retarded</li>
           <li className="mb-4">✔️ Niggmaxxing</li>
           <li className="mb-4">✔️ Canceled af</li>
+          <li className="mb-4">
+            <Link href="">
+            ✔️ Open Sauce
+            </Link>
+            </li>
         </ul>
+      </div>
+      <Footer opensourced="lockin.sol" opensourcedlink="https://github.com/jongan69" poweredby="Retards" poweredbylink="https://solscan.io/token/AJXrZ5VZTvsyXRS9yPsLeST5VwNPpoVvdW17aAruoQ8G"/>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
+        <Canvas>
+          <RainingMoneyBackground />
+        </Canvas>
       </div>
     </main>
   );
