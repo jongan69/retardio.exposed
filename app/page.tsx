@@ -18,7 +18,7 @@ export default function Home() {
     const price = (await response.json())?.uiFormmatted;
     return price;
   };
-  
+
   const fetchTokenPrice = async (tokenAddress: string) => {
     const response = await fetch(`/api/quote`, { method: "POST", body: JSON.stringify({ "outputMint": tokenAddress }) });
     const price = (await response.json())?.uiFormmatted;
@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     const fp = fetchFloorPrice(nfttokenAddress);
     const tp = fetchTokenPrice(coinMintAddres);
-    if(fp) setFloorPrice(fp);
+    if (fp) setFloorPrice(fp);
     if (tp) setTokenPrice(tp);
   }, [nfttokenAddress, coinMintAddres]);
   return (
@@ -40,7 +40,7 @@ export default function Home() {
         </p>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
+            className="pointer-events-auto flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
             href="https://raydium.io/swap/?inputMint=sol&outputMint=6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx&referrer=AMSi7nsBbYVVETPu5rXuC9KgabyXWc1thtfX3L7pSVqd"
             target="_blank"
             rel="noopener noreferrer"
@@ -60,10 +60,10 @@ export default function Home() {
           priority
         />
         <div className="flex flex-col">
-         <code className="font-mono font-bold">Cousin Floor Price: {floorPrice}</code>
-         <br/>
-         <code className="font-mono font-bold">Retardio Price: {tokenPrice}</code>
-         </div>
+          <code className="font-mono font-bold">Cousin Floor Price: {floorPrice}</code>
+          <br />
+          <code className="font-mono font-bold">Retardio Price: {tokenPrice}</code>
+        </div>
       </div>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
@@ -149,14 +149,10 @@ export default function Home() {
           <li className="mb-4">✔️ Pretty Retarded</li>
           <li className="mb-4">✔️ Niggmaxxing</li>
           <li className="mb-4">✔️ Canceled af</li>
-          <li className="mb-4">
-            <Link href="">
-            ✔️ Open Sauce
-            </Link>
-            </li>
+          <li className="mb-4">✔️ Open Sauce</li>
         </ul>
       </div>
-      <Footer opensourced="lockin.sol" opensourcedlink="https://github.com/jongan69" poweredby="Retards" poweredbylink="https://solscan.io/token/AJXrZ5VZTvsyXRS9yPsLeST5VwNPpoVvdW17aAruoQ8G"/>
+      <Footer opensourced="lockin.sol" opensourcedlink="https://github.com/jongan69" poweredby="Retards" poweredbylink="https://solscan.io/token/AJXrZ5VZTvsyXRS9yPsLeST5VwNPpoVvdW17aAruoQ8G" />
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
         <Canvas>
           <RainingMoneyBackground />
