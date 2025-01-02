@@ -5,6 +5,7 @@ import RainingMoneyBackground from "./components/three/RainingMoney";
 import { Canvas } from "@react-three/fiber";
 import Link from "next/link";
 import { Footer } from "./components/footer";
+import { isWebGLAvailable } from "./utils/checkWebGL";
 
 const nfttokenAddress = `GrRjEpwHbLE1KY3uxtAMU4ravHfbMGzWEL8HcERPb3Ad` // Prob using weird endpoint of api
 const coinMintAddres = `6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx`
@@ -12,6 +13,7 @@ const coinMintAddres = `6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx`
 export default function Home() {
   const [floorPrice, setFloorPrice] = useState<any>();
   const [tokenPrice, setTokenPrice] = useState<any>();
+  const [hasWebGL, setHasWebGL] = useState(true);
 
   const fetchFloorPrice = async (tokenAddress: string) => {
     const response = await fetch(`/api/floor`, { method: "POST", body: JSON.stringify({ tokenAddress }) });
@@ -31,6 +33,11 @@ export default function Home() {
     if (fp) setFloorPrice(fp);
     if (tp) setTokenPrice(tp);
   }, [nfttokenAddress, coinMintAddres]);
+
+  useEffect(() => {
+    setHasWebGL(isWebGLAvailable());
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex z-10">
@@ -154,9 +161,13 @@ export default function Home() {
       </div>
       <Footer opensourced="lockin.sol" opensourcedlink="https://github.com/jongan69" poweredby="Retards" poweredbylink="https://solscan.io/token/AJXrZ5VZTvsyXRS9yPsLeST5VwNPpoVvdW17aAruoQ8G" />
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
-        <Canvas>
-          <RainingMoneyBackground />
-        </Canvas>
+        {hasWebGL ? (
+          <Canvas>
+            <RainingMoneyBackground />
+          </Canvas>
+        ) : (
+          <div className="w-full h-full bg-gradient-to-b from-gray-900 to-gray-600 opacity-30" />
+        )}
       </div>
     </main>
   );
